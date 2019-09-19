@@ -8,12 +8,14 @@ import static java.util.Objects.isNull;
 
 public final class SpaceEngineHelper {
 
+    private static final int NEGATIVE = -1;
+
     // Utility class, no reasons to have instances of it
     private SpaceEngineHelper() {}
 
-    public static boolean isThePointInsideTheSpace(final Point<?> startingPoint,
-                                                   final Point<?> endPoint,
-                                                   final Point<?> targetPoint) {
+    public static boolean isPointInsideSpace(final Point startingPoint,
+                                             final Point endPoint,
+                                             final Point targetPoint) {
 
         if(isNull(startingPoint) || isNull(endPoint))
             throw new IllegalArgumentException("Space must have a starting point and an end point");
@@ -27,5 +29,16 @@ public final class SpaceEngineHelper {
 
     public static <T extends Number> BigDecimal getPointValue(final Point<T> point) {
         return new BigDecimal(point.getValue().toString());
+    }
+
+    public static <T extends Number> boolean isNegative(final T value) {
+        return new BigDecimal(value.toString()).signum() == NEGATIVE;
+    }
+
+    @SuppressWarnings("unchecked")
+    public static Point greatest(final Point pointA, final Point pointB) {
+        if(pointA.equals(pointB)) return pointA;
+        if(pointA.compareTo(pointB) > 0) return pointA;
+        return pointB;
     }
 }

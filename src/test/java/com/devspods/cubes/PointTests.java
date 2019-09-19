@@ -98,4 +98,44 @@ public class PointTests {
         assertNotEquals(m, n);
         assertNotEquals(m.hashCode(), n.hashCode());
     }
+
+    @Test
+    @SuppressWarnings("unchecked")
+    public void compareToTest() {
+
+        Point a = new Point<>(0, 0, 0);
+        Point b = new Point<>(0, 0, 0);
+        assertEquals(0, a.compareTo(b));
+        assertEquals(0, b.compareTo(a));
+
+        Point c = new Point<>(1, 2, 3);
+        Point d = new Point<>(2, 1, 0);
+        assertEquals(1, c.compareTo(d));
+        assertEquals(-1, d.compareTo(c));
+
+        Point e = new Point<>(1, 0, 1);
+        Point f = new Point<>(0, 1, 0);
+        assertEquals(1, e.compareTo(f));
+        assertEquals(-1, f.compareTo(e));
+
+        Point g = new Point<>(0, 0, 0);
+        Point h = new Point<>(1, 0, 0);
+        assertEquals(-1, g.compareTo(h));
+        assertEquals(1, h.compareTo(g));
+
+        Point i = new Point<>(1, 1, 0);
+        Point j = new Point<>(2, 2, 0);
+        assertEquals(-1, i.compareTo(j));
+        assertEquals(1, j.compareTo(i));
+
+        Point k = new Point<>(0, 1, 2);
+        Point l = new Point<>(3, 4, 5);
+        assertEquals(-1, k.compareTo(l));
+        assertEquals(1, l.compareTo(k));
+
+        Point m = new Point<>(5, 4, 3);
+        Point n = new Point<>(2, 1, 0);
+        assertEquals(1, m.compareTo(n));
+        assertEquals(-1, n.compareTo(m));
+    }
 }
