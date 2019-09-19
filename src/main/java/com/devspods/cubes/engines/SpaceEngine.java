@@ -22,20 +22,21 @@ public class SpaceEngine<T extends Number> {
 
     @SuppressWarnings("unchecked")
     public SpaceEngine(final int spaceDepth) {
-        logger.info("Creating space with depth of {} units", spaceDepth);
         validateParams(spaceDepth);
-        space = (T[][][]) new Number[spaceDepth][spaceDepth][spaceDepth];
-        int depth = spaceDepth - 1;
+        final int depth = spaceDepth - 1;
         SPACE_END_POINT = new Point<>(depth, depth, depth);
+
+        logger.info("Creating space with depth of {} units", spaceDepth);
+        space = (T[][][]) new Number[spaceDepth][spaceDepth][spaceDepth];
         logger.info("Space created with depth of {} units", spaceDepth);
     }
 
     public void setPoint(final int x, final int y, final int z, T value) {
-        Point<T> pointToSet;
+        final Point<T> pointToSet;
         validateValue(value);
         validatePoint(pointToSet = new Point<>(x, y, z, value));
 
-        logger.info("Setting point: {}", pointToSet);
+        logger.info("Setting {}", pointToSet);
         space[x][y][z] = value;
         touchPoint(pointToSet);
     }
@@ -74,7 +75,7 @@ public class SpaceEngine<T extends Number> {
     }
 
     private void validateParams(final int spaceDepth) {
-        logger.info("Validating space depth");
+        logger.info("Validating space depth before space creation");
         if(spaceDepth < 1)
             throw new IllegalArgumentException("Space depth must be equal or greater than one (1)");
     }
