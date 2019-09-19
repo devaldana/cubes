@@ -16,7 +16,7 @@ public class SpaceEngine<T extends Number> {
 
     private static final Point<?> SPACE_STARTING_POINT = new Point<>(0, 0, 0);
     private final Point<?> SPACE_END_POINT;
-    private final int spaceDepth;
+
     private T[][][] space;
     private Set<Point<T>> touchedPoints = new HashSet<>();
 
@@ -24,35 +24,43 @@ public class SpaceEngine<T extends Number> {
     public SpaceEngine(final int spaceDepth) {
         logger.info("Creating space with depth of {} units", spaceDepth);
         validateParams(spaceDepth);
-        this.spaceDepth = spaceDepth - 1;
         space = (T[][][]) new Number[spaceDepth][spaceDepth][spaceDepth];
-        SPACE_END_POINT = new Point<>(this.spaceDepth, this.spaceDepth, this.spaceDepth);
+        int depth = spaceDepth - 1;
+        SPACE_END_POINT = new Point<>(depth, depth, depth);
+        logger.info("Space created with depth of {} units", spaceDepth);
     }
 
     public void setPoint(final int x, final int y, final int z, T value) {
         Point<T> pointToSet;
         validateValue(value);
         validatePoint(pointToSet = new Point<>(x, y, z, value));
+
+        logger.info("Setting point: {}", pointToSet);
         space[x][y][z] = value;
         touchPoint(pointToSet);
     }
 
     public BigDecimal sumPointsInsideSpace(final int x1, final int y1, final int z1,
                                            final int x2, final int y2, final int z2) {
-        // TODO params validations
+        logger.info("Starting process to sum points inside enclosing space");
+        BigDecimal pointsSum = BigDecimal.ZERO;
         final Point<T> pointA = new Point<>(x1, y1, z1);
         final Point<T> pointB = new Point<>(x2, y2, z2);
         final Point endPoint = greatest(pointA, pointB);
         final Point startingPoint = endPoint.equals(pointA)? pointB: pointA;
-        validateEnclosingSpace(startingPoint, endPoint);
 
-        BigDecimal pointsSum = BigDecimal.ZERO;
+        validateEnclosingSpace(startingPoint, endPoint);
 
         for(final Point<T> point: touchedPoints)
             if(isPointInsideSpace(startingPoint, endPoint, point))
                 pointsSum = addPointValue(point, pointsSum);
 
+        logger.info("Sum finished, returning sum value");
         return pointsSum;
+    }
+
+    public T[][][] getSpace() {
+        return space;
     }
 
     private void touchPoint(final Point<T> point) {
@@ -61,10 +69,12 @@ public class SpaceEngine<T extends Number> {
     }
 
     private BigDecimal addPointValue(final Point<T> point, final BigDecimal pointsSum) {
+        logger.info("Adding point {} to the sum", point);
         return pointsSum.add(getPointValue(point));
     }
 
     private void validateParams(final int spaceDepth) {
+        logger.info("Validating space depth");
         if(spaceDepth < 1)
             throw new IllegalArgumentException("Space depth must be equal or greater than one (1)");
     }
@@ -87,6 +97,7 @@ public class SpaceEngine<T extends Number> {
     }
 
     private void validateEnclosingSpace(final Point startingPoint, final Point endPoint) {
+        logger.info("Validating enclosing space");
         if(endPoint.getX() < startingPoint.getX() ||
            endPoint.getY() < startingPoint.getY() ||
            endPoint.getZ() < startingPoint.getZ())

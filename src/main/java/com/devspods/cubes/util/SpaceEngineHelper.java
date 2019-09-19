@@ -1,13 +1,17 @@
 package com.devspods.cubes.util;
 
 import com.devspods.cubes.domain.Point;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
 
 import static java.util.Objects.isNull;
 
+// This class should NOT be extended
 public final class SpaceEngineHelper {
 
+    private static final Logger logger = LoggerFactory.getLogger(SpaceEngineHelper.class);
     private static final int NEGATIVE = -1;
 
     // Utility class, no reasons to have instances of it
@@ -16,7 +20,7 @@ public final class SpaceEngineHelper {
     public static boolean isPointInsideSpace(final Point startingPoint,
                                              final Point endPoint,
                                              final Point targetPoint) {
-
+        logger.info("Validating if {} is inside enclosing space", targetPoint);
         if(isNull(startingPoint) || isNull(endPoint))
             throw new IllegalArgumentException("Space must have a starting point and an end point");
 
@@ -37,6 +41,7 @@ public final class SpaceEngineHelper {
 
     @SuppressWarnings("unchecked")
     public static Point greatest(final Point pointA, final Point pointB) {
+        logger.info("Calculating greatest point");
         if(pointA.equals(pointB)) return pointA;
         if(pointA.compareTo(pointB) > 0) return pointA;
         return pointB;
