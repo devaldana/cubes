@@ -31,6 +31,10 @@ public class SpaceEngine<T extends Number> {
         logger.info("Space created with depth of {} units", spaceDepth);
     }
 
+    public void setPoint(final Point<T> point) {
+        setPoint(point.getX(), point.getY(), point.getZ(), point.getValue());
+    }
+
     public void setPoint(final int x, final int y, final int z, T value) {
         final Point<T> pointToSet;
         validateValue(value);
@@ -39,6 +43,11 @@ public class SpaceEngine<T extends Number> {
         logger.info("Setting {}", pointToSet);
         space[x][y][z] = value;
         touchPoint(pointToSet);
+    }
+
+    public BigDecimal sumPointsInsideSpace(final Point<T> pointA, final Point<T> pointB) {
+        return sumPointsInsideSpace(pointA.getX(), pointA.getY(), pointA.getZ(),
+                                    pointB.getX(), pointB.getY(), pointB.getY());
     }
 
     public BigDecimal sumPointsInsideSpace(final int x1, final int y1, final int z1,

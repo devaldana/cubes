@@ -3,10 +3,12 @@ package com.devspods.cubes.domain;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 import static java.util.Objects.isNull;
 
 @Data
+@NoArgsConstructor
 @AllArgsConstructor
 public class Point<T extends Number> implements Comparable<Point<T>> {
 
