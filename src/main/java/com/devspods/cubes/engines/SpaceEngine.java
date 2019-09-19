@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
-import static com.devspods.cubes.util.SpaceEngineHelper.*;
+import static com.devspods.cubes.engines.SpaceEngineHelper.*;
 import static java.util.Objects.isNull;
 
 public class SpaceEngine<T extends Number> {

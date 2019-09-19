@@ -1,4 +1,4 @@
-package com.devspods.cubes.util;
+package com.devspods.cubes.engines;
 
 import com.devspods.cubes.domain.Point;
 import org.slf4j.Logger;
