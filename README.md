@@ -29,6 +29,8 @@ Clone the repository and run the next command: `mvn spring-boot:run`. After run 
 ```
 Remember use `application/json` Content-Type header. After run it, you should get a response with the space representation in way of arrays along with the sum of 76.
 
+Also, remember you can open the index.html file in the frontend application to get access to the web interface.
+
 ## Running the tests
 To run the tests, run `mvn test` command.
 
