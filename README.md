@@ -3,7 +3,34 @@ In this repository you can find the backend API, it is a RESTful API developed w
 The frontend app that consumes this API can be found in [this repo](https://github.com/devaldana/cubes-web).
 
 # How to run it
-Clone the repository and run the next command: `mvn spring-boot:run`. To run the tests, run `mvn test`
+Clone the repository and run the next command: `mvn spring-boot:run`. After run it, go to, for example, Postman and put the next URL http://localhost:8080/space/calculate and use the next example payload with POST method:
+
+```
+{
+	"depth": 4,
+	"pointA": {"x": 1, "y": 1, "z": 0},
+	"pointB": {"x": 2, "y": 2, "z": 2},
+	"points": [
+		{"x": 0, "y": 0, "z": 1, "value": 4},
+		{"x": 0, "y": 0, "z": 2, "value": 4},
+		{"x": 1, "y": 0, "z": 0, "value": 1},
+		{"x": 1, "y": 0, "z": 1, "value": 1},
+		{"x": 0, "y": 1, "z": 0, "value": 1},
+		{"x": 1, "y": 1, "z": 2, "value": 1},
+		{"x": 2, "y": 2, "z": 3, "value": 7},
+		{"x": 3, "y": 2, "z": 2, "value": 6},
+		{"x": 2, "y": 3, "z": 1, "value": 9},
+		{"x": 3, "y": 3, "z": 0, "value": 13},
+		{"x": 1, "y": 2, "z": 1, "value": 18},
+		{"x": 1, "y": 2, "z": 2, "value": 57},
+		{"x": 1, "y": 2, "z": 3, "value": 29}
+	]
+}
+```
+Remember use `application/json` Content-Type header. After run it, you should get a response with the space representation in way of arrays along with the sum of 76.
+
+## Running the tests
+To run the tests, run `mvn test` command.
 
 # Layers
 There are just two main layers in this app, the first one is the layer of business and the second one is the layer of presentation.
