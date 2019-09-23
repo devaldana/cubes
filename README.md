@@ -2,6 +2,9 @@
 In this repository you can find the backend API, it is a RESTful API developed with Spring Boot. 
 The frontend app that consumes this API can be found in [this repo](https://github.com/devaldana/cubes-web).
 
+# How to run it
+Clone the repository and run the next command: `mvn spring-boot:run`. To run the tests, run `mvn test`
+
 # Layers
 There are just two main layers in this app, the first one is the layer of business and the second one is the layer of presentation.
 
